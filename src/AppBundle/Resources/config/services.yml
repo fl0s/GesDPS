@@ -1,0 +1,4 @@
+services:
+#    ges_dps_security.example:
+#        class: GesDPS\SecurityBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,10 @@
+form:
+    event:
+        manager: Gestionnaire
+        name: Nom
+        step: Etape
+        date: Date
+    user:
+        username: Nom d'utilisateur
+        enabled: Activé
+        group: Groupe

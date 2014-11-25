@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+{% block body %}
+	<form method="POST" {{ form_enctype(eventForm) }} class="form-horizontal">
+		{{ bootstrap_set_style('horizontal') }}
+		{{ form_errors(eventForm,  { 'global_errors': true }) }}
+		{{ form_widget(eventForm) }}
+		<div class="row">
+			<div class="col-lg-10 col-lg-offset-2">
+				<input class="btn btn-primary" type="submit" value="Enregistrer">
+			</div>
+		</div>
+		{{ bootstrap_set_style('') }}
+	</form>
+{% endblock %}
