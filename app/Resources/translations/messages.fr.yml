@@ -8,3 +8,5 @@ form:
         username: Nom d'utilisateur
         enabled: Activé
         group: Groupe
+    login:
+        forgot_password: Mot de passe oublié
