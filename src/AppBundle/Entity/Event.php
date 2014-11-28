@@ -11,8 +11,8 @@ use APY\DataGridBundle\Grid\Mapping as GRID;
  * @ORM\Table()
  * @ORM\Entity()
  * @GRID\Source(columns="id, name, date, manager.username, coaFormated, status")
- * @GRID\Column(id="coaFormated", title="COA", size="9", type="text", filterable=false)
- * @GRID\Column(id="status", title="Etape", type="text", filterable=false)
+ * @GRID\Column(id="coaFormated", title="event.coa", size="9", type="text", filterable=false)
+ * @GRID\Column(id="status", title="event.step", type="text", filterable=false)
  */
 class Event
 {

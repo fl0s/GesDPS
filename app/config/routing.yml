@@ -1,4 +1,4 @@
-acme_app:
+gesdps_app:
     resource: "@AppBundle/Controller/"
     type:     annotation
     prefix:   /

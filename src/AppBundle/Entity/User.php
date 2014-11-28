@@ -12,7 +12,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\UserRepository")
- * @GRID\Source(columns="id, username, email, enabled, lastLogin, group.name", filterable=false)
+ * @GRID\Source(columns="id, email, enabled, lastLogin, group.name", filterable=false)
+ * @GRID\Column(id="username", title="user.username", filterable=false)
  */
 class User extends BaseUser
 {
@@ -35,7 +36,7 @@ class User extends BaseUser
      *
      * @ORM\ManyToOne(targetEntity="Group")
      * @ORM\JoinColumn(name="group_id", referencedColumnName="id")
-     * @GRID\Column(field="group.name", title="Groupe", filterable=false)
+     * @GRID\Column(field="group.name", title="user.group", filterable=false)
      */
     protected $group;
 

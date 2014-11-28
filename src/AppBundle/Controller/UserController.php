@@ -26,6 +26,8 @@ class UserController extends Controller
 
     	$grid->setSource($source);
 
+        $grid->getColumn('enabled')->setTitle('user.enabled');
+
     	$grid->getColumn('enabled')->manipulateRenderCell(
 		    function($value, $row, $router) {
 		        return ($value?"enable":"disable");

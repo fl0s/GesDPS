@@ -10,3 +10,19 @@ form:
         group: Groupe
     login:
         forgot_password: Mot de passe oublié
+
+event:
+    step: Etape
+    coa: COA
+
+user:
+    group: Groupe
+    username: Nom d'utilisateur
+    enabled: Activation
+    state:
+        enable: Activé
+        disable: Désactivé
+
+profile:
+    edit: Editer
+    change_password: Changer de mot de passe

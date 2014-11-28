@@ -1,0 +1,20 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+<div class="row">
+    <div class="col-sm-2 col-sm-offset-10">
+        <div class="btn-group">
+            <a class="btn btn-primary" href="{{ path('fos_user_profile_edit') }}">{{ 'profile.edit'|trans({}) }}</a>
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">More options</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ path('fos_user_change_password') }}">{{ 'profile.change_password'|trans({}) }}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% include "FOSUserBundle:Profile:show_content.html.twig" %}
+{% endblock fos_user_content %}
