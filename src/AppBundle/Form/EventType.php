@@ -13,6 +13,9 @@ class EventType extends AbstractType
         $builder->add('name', 'text', array(
             'label' => 'form.event.name'
             ));
+        $builder->add('comment', null, array(
+            'label' => 'form.event.comment'
+            ));
         $builder->add('date', 'datetime', array(
             'date_widget'   => 'single_text',
             'time_widget'   => 'single_text',

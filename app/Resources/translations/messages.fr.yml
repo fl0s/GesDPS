@@ -4,6 +4,7 @@ form:
         name: Nom
         step: Etape
         date: Date
+        comment: Commentaire
     user:
         username: Nom d'utilisateur
         enabled: Activé

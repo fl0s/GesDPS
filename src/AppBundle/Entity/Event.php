@@ -9,7 +9,7 @@ use APY\DataGridBundle\Grid\Mapping as GRID;
  * Event
  *
  * @ORM\Table()
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\EventRepository")
  * @GRID\Source(columns="id, name, date, manager.username, coaFormated, status")
  * @GRID\Column(id="coaFormated", title="event.coa", size="9", type="text", filterable=false)
  * @GRID\Column(id="status", title="event.step", type="text", filterable=false)
@@ -36,6 +36,14 @@ class Event
      * @GRID\Column(filterable=false)
      */
     protected $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="text")
+     * @GRID\Column(filterable=false)
+     */
+    protected $comment = "";
 
     /**
      * @var DateTime
@@ -258,5 +266,28 @@ class Event
         }
 
         return (is_null($result)?null:$result->getName());
+    }
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     * @return Event
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string 
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 }

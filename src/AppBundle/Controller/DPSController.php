@@ -80,8 +80,12 @@ class DPSController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $event->setCoa(42);
-            $event->setCoaYear(2014);
+            if (empty($event->getCOA())) {
+
+                $coa = $em->getRepository("AppBundle:Event")->getLastCOA();
+                $event->setCoa($coa +1);
+                $event->setCoaYear(date('Y'));
+            }
 
             $em->persist($event);
             $em->flush();
