@@ -28,6 +28,14 @@ class DPSController extends Controller
                 $row->setField('coaFormated', $row->getEntity()->getFormatedCOA());
                 $row->setField('status', $row->getEntity()->getLastStepName());
 
+                $lastStep = $row->getEntity()->getLastStep();
+
+                if (!is_null($lastStep) && $lastStep->getColor() != "") {
+                    $row->setColor($row->getEntity()->getLastStep()->getColor());
+                } else {
+                    $row->setClass('danger');
+                }
+
                 return $row;
             }
         );

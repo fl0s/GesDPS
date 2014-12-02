@@ -34,6 +34,14 @@ class WorkflowStep
      * @ORM\ManyToMany(targetEntity="Event", mappedBy="steps")
      */
     protected $events;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="color", type="string")
+     */
+    protected $color;
+    
     /**
      * Constructor
      */
@@ -106,5 +114,28 @@ class WorkflowStep
     public function getEvents()
     {
         return $this->events;
+    }
+
+    /**
+     * Set color
+     *
+     * @param string $color
+     * @return WorkflowStep
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * Get color
+     *
+     * @return string 
+     */
+    public function getColor()
+    {
+        return $this->color;
     }
 }

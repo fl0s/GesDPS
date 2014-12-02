@@ -254,20 +254,6 @@ class Event
         return $this->coa_year;
     }
 
-
-    public function getLastStepName()
-    {
-        $result = null;
-
-        foreach ($this->steps as $key => $step) {
-            if (is_null($result) || $step->getId() > $result->getId()) {
-                $result = $step;
-            }
-        }
-
-        return (is_null($result)?null:$result->getName());
-    }
-
     /**
      * Set comment
      *
@@ -289,5 +275,25 @@ class Event
     public function getComment()
     {
         return $this->comment;
+    }
+
+    public function getLastStep()
+    {
+        $result = null;
+
+        foreach ($this->steps as $key => $step) {
+            if (is_null($result) || $step->getId() > $result->getId()) {
+                $result = $step;
+            }
+        }
+
+        return (is_null($result)?null:$result);
+    }
+
+    public function getLastStepName()
+    {
+        $lastStep = $this->getLastStep();
+
+        return (is_null($lastStep)?"":$lastStep->getName());
     }
 }
