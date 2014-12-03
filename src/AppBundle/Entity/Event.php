@@ -40,7 +40,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="text")
+     * @ORM\Column(name="comment", type="text", nullable=true)
      * @GRID\Column(filterable=false)
      */
     protected $comment = "";
