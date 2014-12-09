@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+{% block body %}
+	<div class="row">
+		<div class="col-sm-12">
+			<h3>Liste des étapes <span>
+					<a class="btn btn-primary btn-sm pull-right" href="{{ path('step-edit') }}">Ajouter</a>
+				</span>
+			</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			{{ grid(grid) }}
+		</div>
+	</div>
+{% endblock %}

@@ -16,9 +16,9 @@ class LoadWorkflowStepData extends AbstractFixture implements OrderedFixtureInte
     public function load(ObjectManager $manager)
     {
         $steps = array(
-            array('demande', '#d9534f'),
-            array('devis', '#f0ad4e'),
-            array('facture', '#5cb85c')
+            array('demande', '#d9534f', 1),
+            array('devis', '#f0ad4e', 2),
+            array('facture', '#5cb85c', 3)
         );
 
 
@@ -26,6 +26,7 @@ class LoadWorkflowStepData extends AbstractFixture implements OrderedFixtureInte
             $wStep = new WorkflowStep();
             $wStep->setName($step[0]);
             $wStep->setColor($step[1]);
+            $wStep->setOrder($step[2])
 
             $manager->persist($wStep);
 

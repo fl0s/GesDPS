@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
 
 class EventType extends AbstractType
 {
@@ -23,6 +24,10 @@ class EventType extends AbstractType
             ));
         $builder->add('steps', 'entity', array(
                 'class'     => 'AppBundle:WorkflowStep',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('s')
+                        ->orderBy('s.order', 'ASC');
+                },
                 'property'  => 'name',
                 'expanded'  => true,
                 'multiple'  => true,

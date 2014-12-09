@@ -16,6 +16,19 @@ event:
     step: Etape
     coa: COA
 
+step:
+    name: Nom
+    color: Couleur
+    order: Ordre
+    edit:
+        name: Nom
+        order: Ordre
+        color: Couleur
+        success: L'étape à bien été enregistré!
+    delete:
+        not_found: Etape non trouvée !
+        deleted: L'étape a bien été supprimée !
+
 user:
     group: Groupe
     username: Nom d'utilisateur

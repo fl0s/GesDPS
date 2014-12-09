@@ -49,7 +49,7 @@ class Event
      * @var DateTime
      *
      * @ORM\Column(name="date", type="datetime")
-     * @GRID\Column(filterable=false)
+     * @GRID\Column(filterable=false, format="d/m/Y H:i")
      */
     protected $date;
 
@@ -282,7 +282,7 @@ class Event
         $result = null;
 
         foreach ($this->steps as $key => $step) {
-            if (is_null($result) || $step->getId() > $result->getId()) {
+            if (is_null($result) || $step->getOrder() > $result->getOrder()) {
                 $result = $step;
             }
         }

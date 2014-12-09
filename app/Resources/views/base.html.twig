@@ -26,7 +26,14 @@
                         <li><a href="{{ path('event-index') }}">Gestion DPS</a></li>
                     {% endif %}
                     {% if is_granted('ROLE_ADMIN') %}
-                        <li><a href="{{ path('user-index') }}">Gestion Utilisateurs</a></li>
+                        <li></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Administration <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ path('user-index') }}">Gestion Utilisateurs</a></li>
+                                <li><a href="{{ path('step-index') }}">Gestion des étapes</a></li>
+                            </ul>
+                        </li>
                     {% endif %}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

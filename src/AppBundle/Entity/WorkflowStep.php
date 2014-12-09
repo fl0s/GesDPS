@@ -3,12 +3,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use APY\DataGridBundle\Grid\Mapping as GRID;
 
 /**
  * WorflowStep
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @GRID\Source(columns="id, order, name, color", filterable=false)
  */
 class WorkflowStep
 {
@@ -25,6 +27,7 @@ class WorkflowStep
      * @var string
      *
      * @ORM\Column(name="name", type="string")
+     * @GRID\Column(title="step.name")
      */
     protected $name;
 
@@ -38,9 +41,18 @@ class WorkflowStep
     /**
      * @var string
      *
-     * @ORM\Column(name="color", type="string")
+     * @ORM\Column(name="color", type="string", nullable=true)
+     * @GRID\Column(title="step.color")
      */
     protected $color;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="step_order", type="integer")
+     * @GRID\Column(title="step.order")
+     */
+    protected $order;
     
     /**
      * Constructor
@@ -137,5 +149,28 @@ class WorkflowStep
     public function getColor()
     {
         return $this->color;
+    }
+
+    /**
+     * Set order
+     *
+     * @param integer $order
+     * @return WorkflowStep
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return integer 
+     */
+    public function getOrder()
+    {
+        return $this->order;
     }
 }
