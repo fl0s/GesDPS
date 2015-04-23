@@ -23,20 +23,6 @@ class StepController extends Controller
     {
     	$source = new Entity('AppBundle:WorkflowStep');
 
-        $source->manipulateRow(
-            function ($row) {
-                $stepColor = $row->getEntity()->getColor();
-
-                if (!is_null($stepColor) && $stepColor != "") {
-                    $row->setColor($stepColor);
-                } else {
-                    $row->setClass('danger');
-                }
-
-                return $row;
-            }
-        );
-
     	$grid = $this->get('grid');
 
     	$grid->setSource($source);

@@ -10,7 +10,7 @@ use APY\DataGridBundle\Grid\Mapping as GRID;
  *
  * @ORM\Table()
  * @ORM\Entity
- * @GRID\Source(columns="id, order, name, color", filterable=false)
+ * @GRID\Source(columns="id, order, name, color, nextWorkflowStep.name", filterable=false)
  */
 class WorkflowStep
 {
@@ -37,6 +37,15 @@ class WorkflowStep
      * @ORM\ManyToMany(targetEntity="Event", mappedBy="steps")
      */
     protected $events;
+
+    /**
+     * @var Event
+     * 
+     * @ORM\ManyToOne(targetEntity="WorkflowStep")
+     * @ORM\JoinColumn(name="next_workflow_step_id", referencedColumnName="id")
+     * @GRID\Column(field="nextWorkflowStep.name", title="step.nextworkflow")
+     */
+    protected $nextWorkflowStep;
 
     /**
      * @var string
@@ -126,6 +135,26 @@ class WorkflowStep
     public function getEvents()
     {
         return $this->events;
+    }
+
+    /**
+     * Set next WorkflowStep
+     * @param \AppBundle\Entity\WorkflowStep $nextWorkflowStep
+     */
+    public function setNextWorkflowStep(WorkflowStep $nextWorkflowStep)
+    {
+        $this->nextWorkflowStep = $nextWorkflowStep;
+
+        return $nextWorkflowStep;
+    }
+
+    /**
+     * Get Next WorkflowStep
+     * @return \AppBundle\Entity\WorkflowStep WorkflowStep
+     */
+    public function getNextWorkflowStep()
+    {
+        return $this->nextWorkflowStep;
     }
 
     /**

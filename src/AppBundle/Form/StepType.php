@@ -20,6 +20,10 @@ class StepType extends AbstractType
         $builder->add('color', null, array(
             'label' => 'step.edit.color'
             ));
+        $builder->add('nextWorkflowStep', null, array(
+            'label' => 'step.edit.nextWorkflowStep',
+            'property' => 'name'
+            ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

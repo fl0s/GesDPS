@@ -24,9 +24,9 @@
                 <ul class="nav navbar-nav">
                     {% if is_granted('ROLE_VIEWER') %}
                         <li><a href="{{ path('event-index') }}">Gestion DPS</a></li>
+                        <li><a href="{{ path('event-archive-list') }}">Archive</a></li>
                     {% endif %}
                     {% if is_granted('ROLE_ADMIN') %}
-                        <li></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Administration <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">

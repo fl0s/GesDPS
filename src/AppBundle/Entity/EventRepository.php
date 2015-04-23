@@ -16,7 +16,7 @@ class EventRepository extends EntityRepository
     {
         $year = date('Y');
 
-        return $this->getEntityManager()
+        $lastCoa =  $this->getEntityManager()
             ->createQuery(
                 'SELECT e.coa 
                 FROM AppBundle:Event e 
@@ -25,7 +25,9 @@ class EventRepository extends EntityRepository
             )
             ->setParameter('year', $year)
             ->setMaxResults(1)
-            ->getSingleScalarResult();
+            ->getOneOrNullResult();
+
+        return (is_null($lastCoa)?0:$lastCoa['coa']);
     }
 
 }

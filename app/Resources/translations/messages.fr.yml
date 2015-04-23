@@ -13,17 +13,30 @@ form:
         forgot_password: Mot de passe oublié
 
 event:
-    step: Etape
     coa: COA
+    name: Nom
+    date: Date
+    step: Etape
+    no_data: Il n'y a aucun DPS en cours
+    archive:
+        confirm: Etes vous sûr de vouloir archiver ?
+        success: Le DPS a bien été archivé!
+        error: Une erreur sur le DPS ou sur la prochaine étape a eu lieu!
+        no_data: Aucun DPS n'a été archivé
+    unarchive:
+        success: Le DPS a bien été ré-ouvert!
+        error: Une erreur sur le DPS ou sur la prochaine étape a eu lieu!
 
 step:
     name: Nom
     color: Couleur
     order: Ordre
+    nextworkflow: Etape suivante
     edit:
         name: Nom
         order: Ordre
         color: Couleur
+        nextWorkflowStep: Prochaine étape
         success: L'étape à bien été enregistré!
     delete:
         not_found: Etape non trouvée !

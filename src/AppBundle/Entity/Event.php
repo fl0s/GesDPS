@@ -10,7 +10,7 @@ use APY\DataGridBundle\Grid\Mapping as GRID;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\EventRepository")
- * @GRID\Source(columns="id, name, date, manager.username, coaFormated, status")
+ * @GRID\Source(columns="id, coaFormated, name, date, manager.username, status")
  * @GRID\Column(id="coaFormated", title="event.coa", size="9", type="text", filterable=false)
  * @GRID\Column(id="status", title="event.step", type="text", filterable=false)
  */
@@ -25,7 +25,7 @@ class Event
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @GRID\Column(filterable=false)
+     * @GRID\Column(filterable=false, visible=false)
      */
     protected $id;
 
@@ -33,7 +33,7 @@ class Event
      * @var string
      *
      * @ORM\Column(name="name", type="string")
-     * @GRID\Column(filterable=false)
+     * @GRID\Column(title="event.name", filterable=false)
      */
     protected $name;
 
@@ -49,7 +49,7 @@ class Event
      * @var DateTime
      *
      * @ORM\Column(name="date", type="datetime")
-     * @GRID\Column(filterable=false, format="d/m/Y H:i")
+     * @GRID\Column(title="event.date",filterable=false, format="d/m/Y H:i")
      */
     protected $date;
 
@@ -83,6 +83,14 @@ class Event
      * @ORM\JoinTable(name="events_steps")
      */
     protected $steps;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="archive", type="boolean")
+     */
+    protected $archive = false;
+
     /**
      * Constructor
      */
@@ -295,5 +303,17 @@ class Event
         $lastStep = $this->getLastStep();
 
         return (is_null($lastStep)?"":$lastStep->getName());
+    }
+
+    public function setArchive($bool)
+    {
+        $this->archive = $bool;
+
+        return $bool;
+    }
+
+    public function getArchive()
+    {
+        return $this->archive;
     }
 }
