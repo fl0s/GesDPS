@@ -16,6 +16,7 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 class DPSController extends Controller
 {
     /**
+     * Page principale, liste des DPS en cours
      * @Route("/", name="event-index")
      * @Secure(roles="ROLE_VIEWER")
      */
@@ -36,15 +37,19 @@ class DPSController extends Controller
         $source->manipulateQuery(
             function ($query) use ($tableAlias)
             {
+                // Récupération des DPS n'étant pas archivé
                 $query->andWhere($tableAlias.".archive = 0");
             }
         );
 
+        // Initiation du tableau
     	$grid = $this->get('grid');
-
     	$grid->setSource($source);
+        $grid->setNoDataMessage( $this->get('translator')->trans('event.no_data') );
+        $grid->isReadyForRedirect();
 
-        $actionsColumn = new ActionsColumn('actionn', '');
+        // Colone d'édition des DPS
+        $actionsColumn = new ActionsColumn('colAction', '');
         $grid->addColumn($actionsColumn);
 
         $editAction = new RowAction('', 'event-edit', false, '_self',
@@ -54,9 +59,10 @@ class DPSController extends Controller
                 'title'     => 'Editer'
                 ));
         $editAction->setRouteParameters(array('id'));
-        $editAction->setColumn('actionn');
+        $editAction->setColumn('colAction');
         $grid->addRowAction($editAction);
 
+        // Colonne d'archivage des DPS
         $editAction = new RowAction('', 'event-archive', true, '_self',
             array(
                 'spanClass' => 'glyphicon glyphicon-folder-close',
@@ -65,16 +71,17 @@ class DPSController extends Controller
                 ));
         $editAction->setRouteParameters(array('id'));
         $editAction->setConfirmMessage( $this->get('translator')->trans('event.archive.confirm') );
-        $editAction->setColumn('actionn');
+        $editAction->setColumn('colAction');
         $grid->addRowAction($editAction);
 
+        // Colonne de passage rapide des étapes
         $nextStepAction = new RowAction('next-step', 'event-next-step', false, '_self',
             array(
                 'spanClass' => 'glyphicon glyphicon-ok',
                 'class'     => 'btn btn-primary btn-xs'
                 ));
         $nextStepAction->setRouteParameters(array('id'));
-        $nextStepAction->setColumn('actionn');
+        $nextStepAction->setColumn('colAction');
         $nextStepAction->manipulateRender(
             function ($action, $row)
             {
@@ -90,13 +97,12 @@ class DPSController extends Controller
             }
         );
         $grid->addRowAction($nextStepAction);
-        $grid->setNoDataMessage( $this->get('translator')->trans('event.no_data') );
 
-    	$grid->isReadyForRedirect();
         return $grid->getGridResponse('home.html.twig');
     }
 
     /**
+     * Liste des DPS étant archivé
      * @Route("/archive", name="event-archive-list")
      * @Secure(roles="ROLE_VIEWER")
      */
@@ -117,14 +123,17 @@ class DPSController extends Controller
         $source->manipulateQuery(
             function ($query) use ($tableAlias)
             {
+                // Récupération des DPS archivé
                 $query->andWhere($tableAlias.".archive = 1");
             }
         );
 
         $grid = $this->get('grid');
-
         $grid->setSource($source);
+        $grid->setNoDataMessage( $this->get('translator')->trans('event.archive.no_data') );
+        $grid->isReadyForRedirect();
 
+        // Colonne de réouverture des DPS
         $editAction = new RowAction('', 'event-unarchive', false, '_self',
             array(
                 'spanClass' => 'glyphicon glyphicon-folder-open',
@@ -134,13 +143,12 @@ class DPSController extends Controller
         $editAction->setRouteParameters(array('id'));
         $editAction->setColumn('actionn');
         $grid->addRowAction($editAction);
-        $grid->setNoDataMessage( $this->get('translator')->trans('event.archive.no_data') );
 
-        $grid->isReadyForRedirect();
         return $grid->getGridResponse('event/archive.html.twig');
     }
 
     /**
+     * Vue de l'édition de DPS
      * @Route("/edit/{id}", name="event-edit")
      * @Secure(roles="ROLE_MANAGER")
      */
@@ -153,7 +161,6 @@ class DPSController extends Controller
          * @var \AppBundle\Entity\Event
          */
         $event = null;
-
 
         if (!is_null($id)) {
             $event = $em->getRepository('AppBundle:Event')->find($id);
@@ -177,7 +184,7 @@ class DPSController extends Controller
             $em->persist($event);
             $em->flush();
 
-            $flash->success('L\'évènement à bien été enregistré!');
+            $flash->success('event.edit.success');
 
             return $this->redirect($this->generateUrl('event-index'));
         }
@@ -187,6 +194,7 @@ class DPSController extends Controller
     }
 
     /**
+     * Action de passage rapide des étapes pour un DPS
      * @Route("/next-step/{id}/{idNextStep}", name="event-next-step")
      * @Secure(roles="ROLE_MANAGER")
      */
@@ -206,15 +214,16 @@ class DPSController extends Controller
             $em->persist($event);
             $em->flush();
 
-            $flash->success('L\'évènement à bien été enregistré!');
+            $flash->success('event.next_step.success');
         } else {
-            $flash->error('Une erreur sur le DPS ou sur la prochaine étape a eu lieu!');
+            $flash->error('event.next_step.error');
         }
 
         return $this->redirect($this->generateUrl('event-index'));
     }
 
     /**
+     * Action d'archivage d'un DPS
      * @Route("/action-archive/{id}", name="event-archive")
      * @Secure(roles="ROLE_MANAGER")
      */
@@ -239,6 +248,7 @@ class DPSController extends Controller
     }
 
     /**
+     * Action de ré-ouverture d'un DPS archivé
      * @Route("/action-unarchive/{id}", name="event-unarchive")
      * @Secure(roles="ROLE_MANAGER")
      */

@@ -21,10 +21,15 @@ event:
     archive:
         confirm: Etes vous sûr de vouloir archiver ?
         success: Le DPS a bien été archivé!
-        error: Une erreur sur le DPS ou sur la prochaine étape a eu lieu!
+        error: Une erreur sur l'archivage du DPS a eu lieu!
         no_data: Aucun DPS n'a été archivé
     unarchive:
         success: Le DPS a bien été ré-ouvert!
+        error: Une erreur sur la ré-ouverturee du DPS  a eu lieu!
+    edit:
+        success: Le DPS a été mis à jour!
+    next_step:
+        success: Le DPS est passé à l'étape suivante!
         error: Une erreur sur le DPS ou sur la prochaine étape a eu lieu!
 
 step:
